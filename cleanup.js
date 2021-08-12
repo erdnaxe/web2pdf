@@ -2,8 +2,10 @@
  * Cleanup script: fix elements that are problematic when printing a web page
  */
 
-searchLink = document.querySelector("link[rel='search']")
-if (searchLink && searchLink.title === "Medium") {
-    // Hide Medium privacy policy banner
-    document.evaluate("//a[contains(., 'Privacy Policy')]/../../../..", document).iterateNext().hidden = true
-}    
+// Convert display fixed to display static
+// This removes cookie banners that are hidding content
+[...document.body.getElementsByTagName("*")].filter(
+    x => getComputedStyle(x, null).getPropertyValue("position") === "fixed"
+).forEach(e => {
+    e.style.position = "static";
+});
