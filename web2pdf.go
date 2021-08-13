@@ -46,7 +46,9 @@ func main() {
 
 	// Print
 	log.Printf("Printing %s to %s", url, outputFile)
-	PrintToPDF(url, printToPDFParams, outputFile)
+	if err := PrintToPDF(url, printToPDFParams, outputFile); err != nil {
+		log.Fatal(err)
+	}
 }
 
 // PrintToPDF prints the specified `url` to `outputFile` PDF document. Printing
@@ -55,7 +57,7 @@ func PrintToPDF(
 	url string,
 	printToPDFParams page.PrintToPDFParams,
 	outputFile string,
-) {
+) error {
 	// Create Chrome DevTool context
 	ctx, cancel := chromedp.NewContext(context.Background())
 	defer cancel()
@@ -63,13 +65,11 @@ func PrintToPDF(
 	// Capture PDF document
 	var buf []byte
 	if err := chromedp.Run(ctx, printToPDFAction(url, printToPDFParams, &buf)); err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	// Save PDF document
-	if err := ioutil.WriteFile(outputFile, buf, 0644); err != nil {
-		log.Fatal(err)
-	}
+	return ioutil.WriteFile(outputFile, buf, 0644)
 }
 
 // printToPDFAction is a Chrome DevTool Protocol action that navigates to the
