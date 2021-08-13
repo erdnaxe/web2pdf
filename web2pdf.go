@@ -79,7 +79,7 @@ func printToPDFAction(
 ) chromedp.Tasks {
 	return chromedp.Tasks{
 		chromedp.Navigate(url),
-		chromedp.Evaluate(cleanupScript, nil),
+		chromedp.PollFunction(cleanupScript, nil),
 		chromedp.ActionFunc(func(ctx context.Context) error {
 			buf, _, err := printToPDFParams.Do(ctx)
 			if err != nil {
