@@ -1,6 +1,7 @@
-/*
- * Cleanup script: fix elements that are problematic when printing a web page
- */
+// Copyright (c) 2021 Alexandre Iooss
+// SPDX-License-Identifier: AGPL-3.0-or-later
+//
+// Cleanup script: fix elements that are problematic when printing a web page
 
 async () => {
     // Convert display fixed to display static
