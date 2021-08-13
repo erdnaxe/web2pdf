@@ -1,7 +1,7 @@
 // Copyright (c) 2021 Alexandre Iooss
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-package web2pdf
+package main
 
 import (
 	"testing"
