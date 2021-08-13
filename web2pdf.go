@@ -1,6 +1,8 @@
 // Copyright (c) 2021 Alexandre Iooss
 // SPDX-License-Identifier: AGPL-3.0-or-later
-package main
+
+// web2pdf prints web pages to PDF documents using Chrome DevTools Protocol.
+package web2pdf
 
 import (
 	"context"
